@@ -2,6 +2,9 @@
 #
 # To get started with Next.js see: https://nextjs.org/docs/getting-started
 #
+# REQUIRED: Enable GitHub Pages first: Repo Settings → Pages → Build and deployment → Source: "GitHub Actions"
+# Otherwise configure-pages will fail with "Get Pages site failed. Please verify that the repository has Pages enabled..."
+#
 name: Deploy Next.js site to Pages
 
 on:
