@@ -2,8 +2,8 @@
 #
 # To get started with Next.js see: https://nextjs.org/docs/getting-started
 #
-# REQUIRED: Enable GitHub Pages first: Repo Settings → Pages → Build and deployment → Source: "GitHub Actions"
-# Otherwise configure-pages will fail with "Get Pages site failed. Please verify that the repository has Pages enabled..."
+# If you see "Get Pages site failed": enable Pages in Repo Settings → Pages → Source: "GitHub Actions".
+# Optional: add secret REPO_ACCESS_TOKEN (PAT with repo scope) and set enablement: true to let the action enable Pages.
 #
 name: Deploy Next.js site to Pages
 
@@ -51,6 +51,9 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
+          # Try to enable Pages if not enabled (requires PAT in REPO_ACCESS_TOKEN when GITHUB_TOKEN lacks permission)
+          enablement: true
+          token: ${{ secrets.REPO_ACCESS_TOKEN || github.token }}
       - name: Restore cache
         uses: actions/cache@v4
         with:
