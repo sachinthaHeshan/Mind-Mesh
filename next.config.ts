@@ -1,15 +1,14 @@
 import type { NextConfig } from "next";
 
-// GitHub Pages is served from /repo-name; configure-pages only injects into .js/.cjs/.mjs, not .ts
-const isGitHubPages = typeof process.env.GITHUB_REPOSITORY === "string";
-const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
-const basePath = isGitHubPages ? `/${repoName}` : "";
-const assetPrefix = basePath;
+// GitHub Pages is served from /repo-name; use BASE_PATH from workflow (configure-pages output) when set
+const basePath = process.env.BASE_PATH ?? "";
+const assetPrefix = basePath ? `${basePath}/` : undefined;
 
 const nextConfig: NextConfig = {
   output: "export",
   basePath,
-  assetPrefix: assetPrefix || undefined,
+  assetPrefix,
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
